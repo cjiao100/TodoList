@@ -1,53 +1,17 @@
 <template>
   <div id="app">
-    <!-- {{ msg }} -->
     <Header />
-    <add-todo @handleAdd="handleAdd" />
-    <todos :todos="todos" @handleDelete="handleDelete" />
+    <router-view />
   </div>
 </template>
 
 <script>
-import Todos from "./components/Todos";
 import Header from "./components/layout/Header";
-import AddTodo from "./components/AddTodo";
-import axios from 'axios'
 
 export default {
   name: "app",
   components: {
-    Todos,
-    Header,
-    AddTodo
-  },
-  data() {
-    return {
-      msg: "Hello",
-      todos: []
-    };
-  },
-  created(){
-    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=0')
-      .then(res => this.todos = res.data)
-      .catch(err => console.log(err))
-  },
-  methods: {
-    handleDelete(id) {
-      axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-      // this.todos = this.todos.filter(item => item.id !== id);
-    },
-    handleAdd(item) {
-      const {title, completed} = item
-      axios.post('https://jsonplaceholder.typicode.com/todos', {
-        title,
-        completed
-      })
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
-      this.todos.unshift(item)
-    }
+    Header
   }
 };
 </script>
@@ -71,6 +35,6 @@ body {
   cursor: pointer;
 }
 .btn:hover {
-  background: #666
+  background: #666;
 }
 </style>

@@ -3,7 +3,7 @@
     <p>
       <input type="checkbox" @change="markComplate" />
       {{ todo.title }}
-      <button class="del" @click="$emit('delItem', todo.id)">x</button>
+      <button class="del" @click="$emit('delItem', todo._id)">x</button>
     </p>
   </div>
 </template>

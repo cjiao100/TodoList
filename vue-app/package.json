@@ -1,6 +1,7 @@
 {
-  "name": "vue-app",
-  "version": "0.1.0",
+  "name": "todos",
+  "version": "1.0.0",
+  "description": "待办事项",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
