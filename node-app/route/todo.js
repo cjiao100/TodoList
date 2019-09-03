@@ -39,4 +39,19 @@ router.delete("/del/:id", (req, res) => {
     .catch(err => res.status(400).json(err));
 });
 
+// 更改Todo的状态
+router.put("/update/:id", (req, res) => {
+  Todo.findById(req.params.id)
+    .then(todo => {
+      Todo.findByIdAndUpdate(
+        { _id: req.params.id },
+        { completed: !todo.completed },
+        { new: true }
+      )
+        .then(item => res.json(item))
+        .catch(err => res.status(404).json(err));
+    })
+    .catch(err => res.status(404).json(err));
+});
+
 module.exports = router;

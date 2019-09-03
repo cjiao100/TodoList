@@ -1,7 +1,7 @@
 <template>
   <div class="todo-item" :class="{'is-complete': todo.completed}">
     <p>
-      <input type="checkbox" @change="markComplate" />
+      <input type="checkbox" @change="markComplate(todo_id)" :checked="todo.completed" />
       {{ todo.title }}
       <button class="del" @click="$emit('delItem', todo._id)">x</button>
     </p>
@@ -9,13 +9,18 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   props: {
     todo: Object
   },
   methods: {
-    markComplate() {
-      this.todo.completed = !this.todo.completed;
+    markComplate(id) {
+      axios
+        .put(`http://localhost:3000/api/todo/update/${id}`)
+        .then(res => (this.todo.completed = !this.todo.completed))
+        .catch(err => console.log(err));
     }
   }
 };
