@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
 
 const db = require("./config/keys").mongoURI;
 const todo = require("./route/todo");
@@ -21,7 +21,7 @@ app.use(
     extended: false
   })
 );
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use("/api/todo", todo);
 
@@ -29,6 +29,8 @@ mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
+
+mongoose.set("useFindAndModify", false);
 
 app.get("/", (req, res) => res.send("Hello World!"));
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
