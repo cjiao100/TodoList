@@ -25,14 +25,14 @@ export default {
   },
   created() {
     axios
-      .get("http://localhost:3000/api/todo/")
+      .get("/api/todo/")
       .then(res => (this.todos = res.data))
       .catch(err => console.log(err));
   },
   methods: {
     handleDelete(id) {
       axios
-        .delete(`http://localhost:3000/api/todo/del/${id}`)
+        .delete(`/api/todo/del/${id}`)
         .then(
           res =>
             (this.todos = this.todos.filter(item => item._id !== res.data._id))
@@ -42,7 +42,7 @@ export default {
     handleAdd(item) {
       const { title, completed } = item;
       axios
-        .post("http://localhost:3000/api/todo/add", {
+        .post("/api/todo/add", {
           title,
           completed
         })
